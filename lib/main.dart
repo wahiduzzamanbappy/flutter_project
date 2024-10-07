@@ -7,64 +7,140 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Home(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text('Home'),
+        backgroundColor: Colors.blue,
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 16,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  textStyle:
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                  padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                  shadowColor: Colors.blue,
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  )),
+              onPressed: () {
+                showDialog(
+                  barrierColor: Colors.green,
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      //title: Text('Delete'),
+                      content: const Text('Anonna is My Wife!'),
+                      actions: [
+                        TextButton(onPressed: () {}, child: const Text('No')),
+                        TextButton(onPressed: () {}, child: const Text('Yes')),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: const Text('Tap'),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            TextButton(
+              onPressed: () {
+                print('Text Button');
+              },
+              child: Text('Click here'),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            IconButton(
+              onPressed: () {
+                print('Icon Button');
+              },
+              icon: Icon(Icons.add),
+            ),
+            const SizedBox(height: 16),
+            OutlinedButton(
+              onPressed: () {
+                print('Outlined Button');
+              },
+              child: Text('Outline'),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            InkWell(
+              onTap: () {
+                print('Inkwell');
+              },
+              child: Text('Sample Text'),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              onTap: (){
+                print('Just One Click');
+              },
+
+              onDoubleTap: (){
+                print('Double Click');
+              },
+              onLongPress: (){
+                print('on Long press');
+              },
+              onLongPressEnd: (details) {
+                print('on Long press End');
+              },onLongPressCancel: (){
+                print('on Long press Cancel');
+              },
+              child: const Column(
+                children: [
+                  Text('Just One Click'),
+                  Text('Double Click'),
+                  Text('on Long press'),
+                  Text('on Long press End'),
+                  Text('on Long press Cancel'),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 16,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        onPressed: () {
+          print('Floating Action Button');
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
