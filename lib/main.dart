@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: Home(),
@@ -36,110 +36,104 @@ class Home extends StatelessWidget {
               height: 16,
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  foregroundColor: Colors.white,
-                  textStyle:
-                      TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                  padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                  shadowColor: Colors.blue,
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  )),
               onPressed: () {
-                showDialog(
-                  barrierColor: Colors.green,
-                  barrierDismissible: false,
+                showModalBottomSheet(
+                  barrierColor: Colors.green.shade100,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  isScrollControlled: false,
+                  useSafeArea: true,
+                  enableDrag: false,
                   context: context,
                   builder: (context) {
-                    return AlertDialog(
-                      //title: Text('Delete'),
-                      content: const Text('Anonna is My Wife!'),
-                      actions: [
-                        TextButton(onPressed: () {}, child: const Text('No')),
-                        TextButton(onPressed: () {}, child: const Text('Yes')),
+                    return Column(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Text(
+                                'Title',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Divider(
+                          height: 10,
+                          thickness: 4,
+                        ),
+                        const Text('Sample'),
+                        Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: const Text('Cancel'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: const Text('Save'),
+                            ),
+                          ],
+                        ),
                       ],
                     );
                   },
                 );
               },
-              child: const Text('Tap'),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            TextButton(
-              onPressed: () {
-                print('Text Button');
-              },
-              child: Text('Click here'),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            IconButton(
-              onPressed: () {
-                print('Icon Button');
-              },
-              icon: Icon(Icons.add),
-            ),
-            const SizedBox(height: 16),
-            OutlinedButton(
-              onPressed: () {
-                print('Outlined Button');
-              },
-              child: Text('Outline'),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            InkWell(
-              onTap: () {
-                print('Inkwell');
-              },
-              child: Text('Sample Text'),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            GestureDetector(
-              onTap: (){
-                print('Just One Click');
-              },
-
-              onDoubleTap: (){
-                print('Double Click');
-              },
-              onLongPress: (){
-                print('on Long press');
-              },
-              onLongPressEnd: (details) {
-                print('on Long press End');
-              },onLongPressCancel: (){
-                print('on Long press Cancel');
-              },
-              child: const Column(
-                children: [
-                  Text('Just One Click'),
-                  Text('Double Click'),
-                  Text('on Long press'),
-                  Text('on Long press End'),
-                  Text('on Long press Cancel'),
-                ],
+              child: const Text(
+                'TAP',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
               ),
             ),
-            const SizedBox(
-              height: 16,
+            SizedBox(height: 24),
+            Padding(
+              padding: EdgeInsets.all(18),
+              child: TextField(
+                maxLength: 50,
+                onChanged: (String? value) {
+                  print('value');
+                },
+                controller: TextEditingController(),
+                obscureText: false,
+                maxLines: 1,
+                keyboardType: TextInputType.phone,
+                enabled: true,
+                decoration: InputDecoration(
+                  hintText: 'Phone',
+                  hintStyle: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey.shade50,
+                  ),
+                  labelText: 'Contact Number',
+                  prefix: Icon(Icons.phone),
+                  suffix: Icon(Icons.person),
+                  fillColor: Colors.white54,
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.pink),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 2),
+                  ),
+                  disabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green, width: 4),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('Floating Action Button');
-        },
-        child: Icon(Icons.add),
       ),
     );
   }
