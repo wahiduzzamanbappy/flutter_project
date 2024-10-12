@@ -135,6 +135,16 @@ class Home extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+
+      },
+        backgroundColor: Colors.amberAccent,
+        foregroundColor: Colors.black,
+        //hoverColor: Colors.blue,
+        splashColor: Colors.green,
+      child:
+      const Icon(Icons.add),
+      ),
     );
   }
 }
