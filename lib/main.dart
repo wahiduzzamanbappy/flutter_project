@@ -1,309 +1,207 @@
 import 'package:flutter/material.dart';
 
+// Drawer, NavigationBar, Bottom Navigation bar, SingleChildScrollView, ScrollBar, ListView, ListViewBuilder
+
 void main() {
-  runApp(const MyApp());
+  runApp(HelloWorldApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class HelloWorldApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+    return MaterialApp(
+      debugShowCheckedModeBanner: true,
+      title: 'Hello World App',
       home: Home(),
     );
   }
 }
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  Home({super.key});
+
+  List<String> friendList = [
+    'Iram',
+    'Shabbin',
+    'Rakib',
+    'Hasan',
+    'Roy',
+    'Niloy',
+    'Niloy',
+    'Niloy',
+    'Niloy',
+    'Niloy',
+    'Niloy',
+    'Niloy',
+    'Niloy',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
-        backgroundColor: Colors.blue,
-        centerTitle: true,
+        title: Text('Home'),
+        backgroundColor: Colors.green,
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+          // IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+        ],
+        // leading: Icon(Icons.add),
       ),
-      body: Scrollbar(
-        child: Center(
+      drawer: Drawer(
+        shadowColor: Colors.red,
+        backgroundColor: Colors.white54,
+        width: 300,
+        child: Column(
+          children: [Text('dfsdf')],
+        ),
+      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: 0,
+      //   selectedItemColor: Colors.pink,
+      //   unselectedItemColor: Colors.blue,
+      //   unselectedFontSize: 12,
+      //   showUnselectedLabels: false,
+      //   showSelectedLabels: true,
+      //   onTap: (int selectedIndex) {
+      //     // TODO: have to change state, will see after stateful widget
+      //   },
+      //   items: [
+      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+      //   ],
+      // ),
+      bottomNavigationBar: NavigationBar(
+          selectedIndex: 1,
+          onDestinationSelected: (int selectedIndex) {
+            // TODO: have to change state, will see after stateful widget
+          },
+          destinations: [
+            NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+            NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
+          ]),
+      /*body: Scrollbar(
+        child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 16,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    barrierColor: Colors.green.shade100,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    isScrollControlled: false,
-                    useSafeArea: true,
-                    enableDrag: false,
-                    context: context,
-                    builder: (context) {
-                      return Column(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 16),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Text(
-                                    'Title',
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Divider(
-                              height: 10,
-                              thickness: 4,
-                            ),
-                            const Text('Sample'),
-                            Row(
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  child: const Text('Cancel'),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  child: const Text('Save'),
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                    },
-                  );
-                },
-                child: const Text(
-                  'TAP',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 24),
-              Padding(
-                padding: EdgeInsets.all(18),
-                child: TextField(
-                  //maxLength: 50,
-                  onChanged: (String? value) {
-                    print('value');
-                  },
-                  controller: TextEditingController(),
-                  obscureText: false,
-                  maxLines: 1,
-                  keyboardType: TextInputType.emailAddress,
-                  enabled: true,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                    hintStyle: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade50,
-                    ),
-                    labelText: 'EMail Address',
-                    prefix: Icon(Icons.email),
-                    suffix: Icon(Icons.person),
-                    fillColor: Colors.white54,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 2),
-                    ),
-                    /*disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 4),
-                    ),*/
-                  ),
-                ),
-
-              ),
-              Padding(
-                padding: EdgeInsets.all(18),
-                child: TextField(
-                  //maxLength: 50,
-                  onChanged: (String? value) {
-                    print('value');
-                  },
-                  controller: TextEditingController(),
-                  obscureText: true,
-                  maxLines: 1,
-                  keyboardType: TextInputType.visiblePassword,
-                  enabled: true,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    hintStyle: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade50,
-                    ),
-                    labelText: 'Password',
-                    prefix: Icon(Icons.phone),
-                    suffix: Icon(Icons.person),
-                    fillColor: Colors.white54,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 4),
-                    ),
-                    /*disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 4),
-                    ),*/
-                  ),
-                ),
-
-              ),
-              Padding(
-                padding: EdgeInsets.all(18),
-                child: TextField(
-                  //maxLength: 50,
-                  onChanged: (String? value) {
-                    print('value');
-                  },
-                  controller: TextEditingController(),
-                  obscureText: false,
-                  maxLines: 1,
-                  keyboardType: TextInputType.text,
-                  enabled: true,
-                  decoration: InputDecoration(
-                    hintText: 'Full Name',
-                    hintStyle: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade50,
-                    ),
-                    labelText: 'Full Name',
-                    prefix: Icon(Icons.phone),
-                    suffix: Icon(Icons.person),
-                    fillColor: Colors.white54,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 4),
-                    ),
-                    /*disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 4),
-                    ),*/
-                  ),
-                ),
-
-              ),
-              Padding(
-                padding: EdgeInsets.all(18),
-                child: TextField(
-                  //maxLength: 50,
-                  onChanged: (String? value) {
-                    print('value');
-                  },
-                  controller: TextEditingController(),
-                  obscureText: false,
-                  maxLines: 1,
-                  keyboardType: TextInputType.text,
-                  enabled: true,
-                  decoration: InputDecoration(
-                    hintText: 'Last Name',
-                    hintStyle: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade50,
-                    ),
-                    labelText: 'Last Name',
-                    prefix: Icon(Icons.phone),
-                    suffix: Icon(Icons.person),
-                    fillColor: Colors.white54,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 4),
-                    ),
-                    /*disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 4),
-                    ),*/
-                  ),
-                ),
-
-              ),
-              Padding(
-                padding: EdgeInsets.all(18),
-                child: TextField(
-                  //maxLength: 50,
-                  onChanged: (String? value) {
-                    print('value');
-                  },
-                  controller: TextEditingController(),
-                  obscureText: false,
-                  maxLines: 1,
-                  keyboardType: TextInputType.phone,
-                  enabled: true,
-                  decoration: InputDecoration(
-                    hintText: 'Contact Number',
-                    hintStyle: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade50,
-                    ),
-                    labelText: 'Contact Number',
-                    prefix: Icon(Icons.phone),
-                    suffix: Icon(Icons.person),
-                    fillColor: Colors.white54,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 4),
-                    ),
-                    /*disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 4),
-                    ),*/
-                  ),
-                ),
-
-              ),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
+              Text('sdfdsfd'),
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-
-      },
-        backgroundColor: Colors.amberAccent,
-        foregroundColor: Colors.black,
-        //hoverColor: Colors.blue,
-        splashColor: Colors.green,
-      child:
-      const Icon(Icons.add),
+      ),*/
+      body: Scrollbar(
+        thickness: 10,
+        radius: Radius.circular(10),
+        interactive: true,
+        /* child: ListView(
+          scrollDirection: Axis.vertical,
+          reverse: false,
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          children: [
+            Text('first'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('sdfdsfd'),
+            Text('last'),
+          ],
+        ),*/
+        /* child: ListView.builder(
+          itemCount: 100, // 100-1 = 99 => 0 -> 99
+          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          itemBuilder: (context, index) {
+            return Text('item $index');
+          },
+        ),*/
+        child: ListView.builder(
+          itemCount: friendList.length, // 5 (0-4)
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(friendList[index]),
+            );
+          },
+        ),
       ),
     );
   }
 }
+
+// Suggestion => ctl + space
